@@ -1,0 +1,119 @@
+" ============= Vundle ========================================
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" ================================================================================
+
+" 1. Start the plugin section
+call plug#begin('~/.vim/plugged')
+
+" 2. List your plugins here
+Plug 'rose-pine/vim'
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'itchyny/lightline.vim'
+Plug 'danilamihailov/beacon.nvim'
+Plug 'joeytwiddle/sexy_scroller.vim'
+
+" 3. End the plugin section
+call plug#end()
+
+" 4. Settings to make the theme look good
+syntax on
+set background=dark
+let g:tokyonight_style = 'night' " THEME_EXTRA
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight " THEME_NAME
+
+set termguicolors    " Helps colors look 'true' in modern terminals
+let g:lightline = {'colorscheme': 'tokyonight'} " LIGHTLINE_TAG
+set laststatus=2
+set number
+set relativenumber
+set hlsearch
+set incsearch
+" Change search color to your preference
+hi Search ctermbg=Yellow ctermfg=Black
+" Pressing Space will clear the search highlights
+nnoremap <Space> :noh<CR>
+
+" Make Vim background transparent
+hi Normal guibg=NONE ctermbg=NONE
+hi NonText guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
+
+" --- Beacon Settings ---
+" Flash even on small jumps (set to 5 lines instead of 10)
+let g:beacon_minimal_jump = 5
+
+" Make the flash bigger and more noticeable
+let g:beacon_size = 60
+
+" Change the color of the flash (e.g., a bright purple or cyan)
+" This requires termguicolors to be ON
+highlight Beacon guibg=#ff00ff ctermbg=magenta
+
+" Fix cursor shape: Block in Normal, Beam in Insert
+let &t_SI = "\e[6 q" " Beam/Vertical line for Insert mode
+let &t_SR = "\e[4 q" " Underline for Replace mode
+let &t_EI = "\e[2 q" " Block for Normal mode
+
+" Optional: Make it blink (change 2 to 1, 6 to 5)
+" let &t_EI = "\e[1 q"
+
+set cursorline
+" Optional: Make the line look subtle so it doesn't distract
+highlight CursorLine ctermbg=235 guibg=#524f67
+
+" Keeps 10 lines of context above/below the cursor
+" This makes the page 'slide' as you move, which feels more animated
+set scrolloff=10
+
+" --- SexyScroller Settings ---
+let g:SexyScroller_ScrollTime = 10   " ms per line (lower = faster sliding)
+let g:SexyScroller_CursorTime = 5    " ms for cursor easing
+let g:SexyScroller_MaxTime = 300     " Don't let long scrolls take forever
+
+execute pathogen#infect()

@@ -1,0 +1,15 @@
+# Vim temporary files
+*.swp
+*.swo
+.netrwhist
+.viminfo
+
+# Vim undo/backup folders (if you use them)
+vim/undo/
+vim/backups/
+vim/view/
+
+# If you use a plugin manager like Vim-Plug, 
+# it's usually better to ignore the 'plugged' folder 
+# and just track your 'vimrc' file.
+vim/plugged/
